@@ -31,12 +31,19 @@ echo -e " --full Full nmap scan"
 }
 scan_ports() {
 local ip=$1
-echo -e "${YELLOW}[*] Scanning common ports on $ip...${NC}"
-for port in 22 80 443 445 8080; do
-timeout 1 bash -c "echo > /dev/tcp/$ip/$port" 2>/dev/null && \
-echo -e "${GREEN}[OPEN] $ip:$port${NC}" || \
-echo -e "${RED}[CLOSED] $ip:$port${NC}"
+echo -e "${YELLOW}[*] Scanning common ports on $ip ...${NC}"
+echo "-----------------------------------"
+for port in 21 22 25 53 80 139 443 445 3306 3389 8080 8443; do
+echo -n " Checking $ip:$port ... "
+timeout 1 bash -c "echo > /dev/tcp/$ip/$port" 2>/dev/null
+if [ $? -eq 0 ]; then
+echo -e "${GREEN}[OPEN] $ip:$port${NC}"
+echo "$ip:$port OPEN" >> alive.txt
+else
+echo -e "${RED}[CLOSED]${NC}"
+fi
 done
+echo "-----------------------------------"
 }
 print_banner
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
