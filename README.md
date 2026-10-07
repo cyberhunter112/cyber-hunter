@@ -83,8 +83,3 @@ Built with ❤️ for the community.
 - Version: 4.0 ULTIMATE
 *If it helped you, give it a
 ⭐ on GitHub!*
-**After paste, save and push:**
-```bash
-git add README.md
-git commit -m "professional readme v4.0"
-git push
