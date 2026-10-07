@@ -46,7 +46,8 @@ fi
 TARGET=${1:-"192.168.177.0/24"}
 MODE=${2:-"quick"}
 echo -e "${CYAN}[*] Target: $TARGET | Mode: $MODE${NC}"
-> alive.txtif [[ $TARGET =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+> alive.txt
+if [[ $TARGET =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 echo -e "${YELLOW}[*] Single IP mode: $TARGET${NC}"
 ping -c 1 -W 1 $TARGET &>/dev/null && {
 echo -e "${GREEN}[ALIVE] $TARGET${NC}"
